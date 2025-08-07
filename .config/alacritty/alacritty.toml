@@ -1,0 +1,20 @@
+[general]
+live_config_reload = true
+import = [
+    "~/.config/alacritty/themes/tokyo-night.toml"
+]
+
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font]
+normal.family = "JetBrainsMono"
+size = 16.0
+
+[window]
+opacity = 0.9
