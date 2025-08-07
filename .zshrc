@@ -26,4 +26,5 @@ eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/ohmyposh.toml)"
 # ALIASES #
 ###########
 alias ls='ls --color'
+alias lsa='ls --color -lah'
 alias cls='clear'
