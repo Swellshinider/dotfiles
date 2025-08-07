@@ -1,0 +1,80 @@
+version = 3
+final_space = true
+console_title_template = "{{.Folder}}{{if .Root}} :: root{{end}} :: {{.Shell}}"
+
+[palette]
+  path_color = 'blue'
+  background_color = 'transparent'
+  highlight_color = 'magenta'
+  error_color = 'red'
+  git_fore_color = '#6c6c6c'
+  exec_time_color = 'yellow'
+
+# First block
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'path'
+    style = 'plain'
+    background = 'p:background_color'
+    foreground = 'p:path_color'
+    template = '{{ .Path }}'
+
+    [blocks.segments.properties]
+      style = 'full'
+
+  [[blocks.segments]]
+    type = 'git'
+    style = 'plain'
+    foreground = 'p:git_fore_color'
+    background = 'p:background_color'
+    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed)}}*{{ end }} <cyan>{{ if gt .Behind 0}}↓{{ end }} {{ if gt .Ahead 0}}↑{{ end }}</>'
+
+    [blocks.segments.properties]
+      branch_icon = ''
+      commit_icon = '@'
+      fetch_status = true
+
+# Right block
+[[blocks]]
+  type = 'rprompt'
+  alignment = 'right'
+  overflow = 'hidden'
+
+  [[blocks.segments]]
+    type = 'executiontime'
+    style = 'plain'
+    foreground = 'p:exec_time_color'
+    background = 'p:background_color'
+    template = '{{ .FormattedMs }}'
+
+    [blocks.segments.properties]
+      threshold = 3000
+      style = 'austin'
+
+# Second block
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    template = "❯"
+    background = 'p:background_color'
+    foreground_templates = [
+      "{{if gt .Code 0}}p:error_color{{end}}",
+      "{{if eq .Code 0}}p:highlight_color{{end}}"
+    ]
+
+[transient_prompt]
+  template = "❯ "
+  background = 'p:background_color'
+  foreground_templates = [
+    "{{if gt .Code 0}}p:error_color{{end}}",
+    "{{if eq .Code 0}}p:highlight_color{{end}}"
+  ]
