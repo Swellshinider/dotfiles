@@ -1,67 +1,114 @@
 {
+  "layer": "top",
   "position": "top",
-  "modules-left": [
-    "hyprland/workspaces"
-  ],
-  "modules-center": [
-    "hyprland/window"
-  ],
+  "height": 32,
+
+  // Modules
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": [],
   "modules-right": [
-    "wireplumber",
-    "network",
+    "backlight",
     "bluetooth",
+    "network#wifi",
+    "wireplumber",
     "battery",
-    "clock"
+    "clock#time",
+    "clock#date"
   ],
-  "clock": {
-    "format": "<span foreground='#f5c2e7'>   </span>{:%H:%M}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-  },
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
+
+  // Hyprland workspaces
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "6": "六",
+      "7": "七",
+      "8": "八",
+      "9": "九",
+      "10": "十",
+      "default": "○"
     },
-    "format": "<span size='13000' foreground='#a6e3a1'>{icon} </span> {capacity}%",
-    "format-warning": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {capacity}%",
-    "format-critical": "<span size='13000' foreground='#E38C8F'>{icon} </span> {capacity}%",
-    "format-charging": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
-    "format-plugged": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
-    "format-alt": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {time}",
-    "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+    // Display special workspaces if any
+    "show-special": true,
+    // Persist a default number of workspaces on each monitor
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+
+  // Clock module: show date and time. Use user's timezone.
+  "clock#time": {
+    "format": "{:%H:%M}",
+    "tooltip-format": "{:%A}"
+  },
+
+  "clock#date": {
+    "format": "{:%d/%m/%Y}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
+  },
+
+  // Battery module
+  "battery": {
+    // Show icon and capacity percentage
+    "format": "{icon} {capacity}%",
+    // Use icons that step through empty to full
     "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
+      "", // 0–20%
+      "", // 20–40%
+      "", // 40–60%
+      "", // 60–80%
+      "" // 80–100%
     ],
-    "tooltip-format": "{time}"
+    // Poll every minute
+    "interval": 60,
+    // Only show tooltip if hovered
+    "tooltip": true
   },
-  "network": {
-    "format-wifi": "<span size='13000' foreground='#f5e0dc'>  </span>{essid}",
-    "format-ethernet": "<span size='13000' foreground='#f5e0dc'>󰤭  </span> Disconnected",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "<span size='13000' foreground='#f5e0dc'>  </span>Disconnected",
-    "tooltip-format-wifi": "Signal Strenght: {signalStrength}%",
-    "on-click": "nm-connection-editor"
-  },
+
   "wireplumber": {
-    "format": "{volume}% {icon}",
-    "format-muted": "muted ",
-    "format-icons": [
-      "",
-      "",
-      ""
-    ],
+    "format": "{icon} {volume}%",
+    "format-muted": "  Muted",
+    "format-icons": ["", "", ""],
     "scroll-step": 1,
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%+",
     "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
   },
+
+  // Network module for Wi‑Fi
+  "network#wifi": {
+    // Only show when connected; hide when no interface
+    "format-wifi": "{icon} {signalStrength}%",
+    "format-ethernet": "󰤭 {signalStrength}%",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "󰤭  Offline",
+    "format-icons": [
+      "󰤯", // 0–25% signal
+      "󰤟", // 25–50% signal
+      "󰤢", // 50–75% signal
+      "󰤥" // 75–100% signal
+    ],
+    "tooltip-format": "{essid} ({ipaddr})\nSignal: {signalStrength}%",
+    "on-click": "nm-connection-editor"
+  },
+
+  // Bluetooth module
   "bluetooth": {
-    "format": " {status}",
-    "format-connected": " {device_alias}",
+    "format": "{icon}",
+    "format-icons": {
+      "enabled": " On",
+      "disabled": " Off"
+    },
     "on-click": "blueman-manager"
+  },
+
+  // Backlight module
+  "backlight": {
+    "format": " {percent}%",
+    "tooltip": false
   }
 }

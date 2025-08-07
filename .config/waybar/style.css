@@ -1,125 +1,112 @@
-@import "mocha.css"; 
-
+/* Global defaults */
 * {
-    font-family: "MesloLGS Nerd Font Mono Bold";
-    font-size: 16px;
-    min-height: 0;
-    font-weight: bold;
+    font-family: "JetBrainsMono Nerd Font", "FontAwesome", monospace;
+    font-size: 13px;
+    color: #f8f8f2;
 }
 
+/* Base bar window */
 window#waybar {
-    background: transparent;
-    background-color: @crust;
-    color: @overlay0;
-    transition-property: background-color;
-    transition-duration: 0.1s;
-    border-bottom: 1px solid @overlay1;
-}
-
-#window {
-    margin: 8px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-button {
-    box-shadow: inset 0 -3px transparent;
+    /* Slightly translucent dark background */
+    background-color: rgba(30, 30, 46, 0.70);
     border: none;
-    border-radius: 0;
+    padding: 4px 6px;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background: inherit;
-    color: @mauve;
-    border-top: 2px solid @mauve;
+/* Hidden bar fades out */
+window#waybar.hidden {
+    opacity: 0.2;
 }
 
+/* Workspace buttons */
 #workspaces button {
-    padding: 0 4px;
+    background-color: transparent;
+    padding: 0 10px;
+    margin: 0 2px;
+    border-radius: 5px;
+    color: #cfcfe8;
+    /* Remove default button border */
+    border: none;
+    box-shadow: none;
 }
 
-#workspaces button.focused {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: @rosewater;
-    border-top: 2px solid @rosewater;
+/* Hover state for workspaces */
+#workspaces button:hover {
+    background-color: rgba(98, 114, 164, 0.4);
 }
 
+/* Active workspace styling */
 #workspaces button.active {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: @mauve;
-    border-top: 2px solid @mauve;
+    background-color: #6272a4;
+    color: #ffffff;
 }
 
+/* Urgent workspace: highlight in red */
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: #ff5555;
+    color: #ffffff;
 }
 
-#pulseaudio,
+/* Modules grouping */
 #clock,
 #battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#wireplumber,
-#tray,
 #network,
-#mode,
-#scratchpad {
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 4px;
-  margin-right: 4px;
-  padding-left: 4px;
-  padding-right: 4px;
+#bluetooth,
+#wireplumber,
+#backlight {
+    padding: 0 12px;
+    margin-left: 6px;
+    border-radius: 5px;
+    background-color: rgba(68, 71, 90, 0.8);
+    color: #f8f8f2;
 }
 
-#bluetooth {
-    color: @blue;
-    border-bottom: 2px solid @blue;
+/* Add a hover effect to right modules */
+#clock:hover,
+#battery:hover,
+#network:hover,
+#bluetooth:hover,
+#wireplumber,
+#backlight:hover {
+    background-color: rgba(98, 114, 164, 0.6);
 }
 
-#clock {
-    color: @maroon;
-    border-bottom: 2px solid @maroon;
+/* Battery states */
+#battery.charging,
+#battery.plugged {
+    background-color: #50fa7b;
+    color: #282a36;
 }
 
-#clock.date {
-    color: @mauve;
-    border-bottom: 2px solid @mauve;
+#battery.critical:not(.charging) {
+    background-color: #ff5555;
+    color: #ffffff;
 }
 
-#pulseaudio {
-    color: @blue;
-    border-bottom: 2px solid @blue;
+/* Disconnected network state */
+#network.disconnected {
+    background-color: #ff5555;
+    color: #ffffff;
 }
 
-#network {
-    color: @yellow;
-    border-bottom: 2px solid @yellow;
+/* Reduce spacing on first right module */
+.modules-right > widget:first-child > #clock,
+.modules-right > widget:first-child > #battery,
+.modules-right > widget:first-child > #network,
+.modules-right > widget:first-child > #bluetooth,
+.modules-right > widget:first-child > #wireplumber,
+.modules-right > widget:first-child > #backlight {
+    margin-left: 0;
 }
 
-#idle_inhibitor {
-    margin-right: 12px;
-    color: #7cb342;
+/* Align modules-left and modules-right spacing */
+#workspaces {
+    margin-right: 8px;
+    margin-left: 4px;
 }
 
-#idle_inhibitor.activated {
-    color: @red;
-}
-
-#battery {
-    color: @green;
-    border-bottom: 2px solid @green;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left>widget:first-child>#workspaces {
-    margin-left: 0px;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right>widget:last-child>#workspaces {
-    margin-right: 0px;
+/* Provide a slight glow for hovered workspace when active */
+#workspaces button.active:hover {
+    background-color: #6e82b2;
 }
