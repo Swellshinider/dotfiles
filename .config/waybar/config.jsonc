@@ -25,6 +25,7 @@
         "tray",
         "custom/power"
     ],
+    
     // Modules configuration
     "hyprland/workspaces": {
         "disable-scroll": true,
