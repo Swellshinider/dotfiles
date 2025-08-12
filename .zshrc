@@ -45,6 +45,7 @@ eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/ohmyposh.toml)"
 alias ls='ls --color'
 alias lsa='ls --color -lah'
 alias cls='clear'
+alias poff='sync && sudo systemctl poweroff'
 
 ###############
 # KEYBINDINGS #
