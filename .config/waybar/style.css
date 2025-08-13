@@ -75,6 +75,11 @@ button:hover {
   padding-right: 4px;
 }
 
+#bluetooth {
+    color: @blue;
+    border-bottom: 2px solid @blue;
+}
+
 #clock {
     color: @maroon;
     border-bottom: 2px solid @maroon;
@@ -117,11 +122,4 @@ button:hover {
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right>widget:last-child>#workspaces {
     margin-right: 0px;
-}
-
-#custom-vpn {
-    color: @lavender;
-    border-radius: 15px;
-    padding-left: 6px;
-    padding-right: 6px;
 }
