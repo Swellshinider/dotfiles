@@ -67,7 +67,7 @@ window#waybar.hidden {
 #battery:hover,
 #network:hover,
 #bluetooth:hover,
-#wireplumber,
+#wireplumber:hover,
 #backlight:hover {
     background-color: rgba(98, 114, 164, 0.6);
 }
