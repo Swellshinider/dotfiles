@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -8,10 +7,10 @@ wp="$(find "$WALLPAPER_DIR" -type f \( -iname '*.png' -o -iname '*.jpg' -o -inam
 # start hyprpaper if not running
 pgrep -x hyprpaper >/dev/null || hyprpaper & disown
 # tiny delay so hyprpaper is ready
-sleep 0.3
+sleep 0.1
 
-# (optional) preload for instant display
+# preload
 hyprctl hyprpaper preload "$wp"
 
-# set the same wallpaper on all monitors
+# set
 hyprctl hyprpaper wallpaper ",$wp"
