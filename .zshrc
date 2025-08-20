@@ -54,3 +54,7 @@ alias vim='nvim'
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
