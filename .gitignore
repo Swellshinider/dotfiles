@@ -1,1 +1,2 @@
-**/*.dat
+**/copyq_*.dat
+**/copyq.lock
