@@ -1,23 +1,23 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 32,
-
-  // Modules
+  "height": 36,
+  "spacing": 0,
+  "margin": "5 10 0 10",
+  // spacer
+  "custom/spacer": {
+    "format": "  ",
+    "tooltip": false
+  },
+  // separator
+  "custom/separator": {
+    "format": "/",
+    "tooltip": false
+  },
+  // Left modules
   "modules-left": [
-    "tray",
     "hyprland/workspaces"
   ],
-  "modules-center": ["hyprland/window"],
-  "modules-right": [
-    "backlight",
-    "wireplumber",
-    "battery",
-    "clock#time",
-    "clock#date"
-  ],
-
-  // Hyprland workspaces
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
@@ -33,56 +33,144 @@
       "10": "十",
       "default": "○"
     },
-    // Display special workspaces if any
     "show-special": true,
-    // Persist a default number of workspaces on each monitor
+    "on-scroll-up": "hyprctl dispatch workspace +1",
+    "on-scroll-down": "hyprctl dispatch workspace -1",
+    "on-click": "activate",
     "persistent-workspaces": {
-      "*": 10
+      "*": 5
     }
   },
-
-  // Clock module: show date and time. Use user's timezone.
-  "clock#time": {
-    "format": "{:%H:%M}",
-    "tooltip-format": "{:%A}"
+  // Center modules
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "hyprland/window": {
+    "format": "{class}",
+    "icon": true,
+    "tooltip": false,
+    "rewrite": {
+      "Vivaldi-stable": "Vivaldi",
+      "discord": "Discord",
+      "dev.zed.Zed": "Zed Editor",
+      "kitty": "Kitty",
+      "librewolf": "LibreWolf",
+      "polkit-gnome-authentication-agent-1": "Authentication",
+      "^$": "~@"
+    },
+    "max-length": 50
   },
-
-  "clock#date": {
-    "format": "{:%d/%m/%Y}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
-  },
-
-  // Battery module
-  "battery": {
-    // Show icon and capacity percentage
-    "format": "{icon} {capacity}%",
-    // Use icons that step through empty to full
-    "format-icons": [
-      "", // 0–20%
-      "", // 20–40%
-      "", // 40–60%
-      "", // 60–80%
-      "" // 80–100%
-    ],
-    // Poll every minute
-    "interval": 60,
-    // Only show tooltip if hovered
-    "tooltip": true
-  },
-
-  "wireplumber": {
-    "format": "{icon} {volume}%",
-    "format-muted": "  Muted",
-    "format-icons": ["", "", ""],
-    "scroll-step": 1,
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%+",
-    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
-  },
-
+  // Right modules
+  "modules-right": [
+    "backlight",
+    "custom/separator",
+    "battery",
+    "custom/separator",
+    "wireplumber",
+    "custom/separator",
+    "clock#time",
+    "clock#date",
+    "custom/separator",
+    "tray",
+    "idle_inhibitor",
+    "custom/notification"
+  ],
   // Backlight module
   "backlight": {
-    "format": " {percent}%",
+    "format": "  {percent}%",
     "tooltip": false
+  },
+  // Battery
+  "battery": {
+    "interval": 2,
+    "states": {
+      "good": 90,
+      "warning": 30,
+      "critical": 15
+    },
+    "tooltip": true,
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "tooltip-format": "Time remaining: {time}"
+  },
+  // Audio
+  "wireplumber": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "   Muted",
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "󰏲",
+      "portable": "󰄝",
+      "car": "󰄋",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
+    "tooltip": false
+  },
+  // Clock
+  "clock#time": {
+    "format": "{:%H:%M}",
+    "tooltip-format": "{:%A}",
+    "signal": 3,
+    "tooltip": false,
+    "on-click": "gnome-clocks"
+  },
+  "clock#date": {
+    "format": "{:%d/%m/%Y}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
+    "on-click": "gnome-clocks"
+  },
+  // System tray
+  "tray": {
+    "icon-size": 18,
+    "spacing": 8,
+    "show-passive-items": true
+  },
+  // Coffef inhibitor
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰛊"
+    },
+    "tooltip-format-activated": "Screen will stay awake",
+    "tooltip-format-deactivated": "Screen can sleep"
+  },
+  // Notifications
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   }
 }
