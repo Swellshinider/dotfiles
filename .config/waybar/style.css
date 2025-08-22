@@ -1,130 +1,184 @@
-/* Global defaults */
 * {
-  font-family: "JetBrainsMono Nerd Font", "FontAwesome", monospace;
-  font-size: 13px;
-  color: #f8f8f2;
+  font-family:
+    "Cantarell", "Noto Sans CJK JP", "JetBrainsMono Nerd Font Propo",
+    "Nerd Font", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-/* Base bar window */
-window#waybar {
-  /* Slightly translucent dark background */
-  background-color: rgba(30, 30, 46, 0.70);
-  border: none;
-  padding: 4px 6px;
-  transition: background-color 0.3s ease;
-}
+@define-color bg @background;
+@define-color fg @cursor;
+@define-color ic @color12;
+@define-color it @bg;
+@define-color border @color1;
+@define-color tt @fg;
 
-/* Hidden bar fades out */
-window#waybar.hidden {
-  opacity: 0.2;
-}
-
-/* Workspace buttons */
-#workspaces button {
-  background-color: transparent;
-  padding: 0 10px;
-  margin: 0 2px;
-  border-radius: 5px;
-  color: #cfcfe8;
-  /* Remove default button border */
-  border: none;
-  box-shadow: none;
-}
-
-/* Hover state for workspaces */
-#workspaces button:hover {
-  background-color: rgba(98, 114, 164, 0.4);
-}
-
-/* Active workspace styling */
-#workspaces button.active {
-  background-color: #6272a4;
-  color: #ffffff;
-}
-
-/* Urgent workspace: highlight in red */
-#workspaces button.urgent {
-  background-color: #ff5555;
-  color: #ffffff;
-}
-
-/* System Tray */
-#tray {
-  margin: 0;
-  padding: 0;
-  border: none;
-  box-shadow: none;
-  background: transparent;
-}
-
-#tray>* {
-  padding: 4px 6px;
-  margin: 0 4px;
-  border-radius: 6px;
-  background-color: rgba(40, 42, 54, 0.6);
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  /* scale icon a bit (GTK CSS) */
-  -gtk-icon-transform: scale(2);
-}
-
-/* Hover/active feedback */
-#tray > *:hover {
-  background-color: rgba(98, 114, 164, 0.6);
-}
-
-/* Optional: tighter gaps at ends */
-#tray > *:first-child { margin-left: 0; }
-#tray > *:last-child  { margin-right: 0; }
-
-/* Modules grouping */
-#clock,
-#battery,
-#wireplumber,
-#backlight {
-  padding: 0 12px;
-  margin-left: 6px;
-  border-radius: 5px;
-  background-color: rgba(68, 71, 90, 0.8);
-  color: #f8f8f2;
-}
-
-/* Add a hover effect to right modules */
-#clock:hover,
-#battery:hover,
-#wireplumber:hover,
-#backlight:hover {
-  background-color: rgba(98, 114, 164, 0.6);
-}
-
-/* Battery states */
-#battery.charging,
-#battery.plugged {
-  background-color: #50fa7b;
-  color: #282a36;
-}
-
-#battery.critical:not(.charging) {
-  background-color: #ff5555;
-  color: #ffffff;
-}
-
-/* Reduce spacing on first right module */
-.modules-right>widget:first-child>#clock,
-.modules-right>widget:first-child>#battery,
-.modules-right>widget:first-child>#network,
-.modules-right>widget:first-child>#bluetooth,
-.modules-right>widget:first-child>#wireplumber,
-.modules-right>widget:first-child>#backlight {
+.modules-left>widget\:first-child>#workspaces {
   margin-left: 0;
 }
 
-/* Align modules-left and modules-right spacing */
-#workspaces {
-  margin-right: 8px;
-  margin-left: 4px;
+.modules-right>widget\:last-child>#workspaces {
+  margin-right: 0;
 }
 
-/* Provide a slight glow for hovered workspace when active */
-#workspaces button.active:hover {
-  background-color: #6e82b2;
+#waybar {
+  color: #c0caf5;
+  border-radius: 5px 5px 5px 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+tooltip {
+  border-radius: 8px;
+  border: 1px solid @border;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+tooltip label {
+  color: @tt;
+}
+
+button {
+  border: none;
+  border-radius: 0;
+  padding: 0 5px;
+  transition: all 0.2s ease;
+}
+
+#workspaces {
+  background-color: @bg;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 2px;
+}
+
+#workspaces button {
+  background-color: transparent;
+  color: #d3bc94;
+  border-radius: 6px;
+  margin: 0 2px;
+  padding: 0 8px;
+  transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+  color: @color15;
+  background-color: rgba(187, 154, 247, 0.1);
+}
+
+#workspaces button.active {
+  color: @color15;
+  background-color: @color1;
+  font-weight: bold;
+}
+
+#workspaces button.empty:not(.active) {
+  color: #656565;
+}
+
+#workspaces button.urgent {
+  background-color: #fd6d87;
+  color: #1a1b26;
+}
+
+#custom-spacer {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#custom-separator {
+  padding: 0px;
+}
+
+#window {
+  background-color: @bg;
+  color: @fg;
+  padding: 0 12px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+#backlight {
+  background-color: @ic;
+  color: @it;
+  padding: 0 12px;
+  border-radius: 10px 0 0 10px;
+  margin: 5px 0 5px 5px;
+}
+
+#battery {
+  background-color: @ic;
+  color: @it;
+  padding: 0 12px;
+  border-radius: 10px 0 0 10px;
+  margin: 5px 0 5px 5px;
+}
+
+#battery.charging {
+  color: rgb(79, 255, 196);
+}
+
+#battery.critical:not(.charging) {
+  animation: blink 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite alternate;
+}
+
+#wireplumber {
+  background-color: @ic;
+  color: @it;
+  padding: 0 12px;
+  border-radius: 10px 0 0 10px;
+  margin: 5px 0 5px 5px;
+}
+
+#clock.time {
+  background-color: @ic;
+  color: @it;
+  padding: 0 12px;
+  border-radius: 10px 0 0 10px;
+  margin: 5px 0 5px 5px;
+}
+
+#clock.date {
+  background-color: @bg;
+  color: @fg;
+  padding: 0 12px;
+  border-radius: 0 10px 10px 0;
+  margin: 5px 5px 5px 0;
+}
+
+
+@keyframes blink {
+  to {
+    background-color: #f7768e;
+    color: #1a1b26;
+  }
+}
+
+
+#tray {
+  background-color: @bg;
+  padding: 0 10px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #f7768e;
+}
+
+#custom-notification,
+#idle_inhibitor {
+  background-color: @bg;
+  color: @fg;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 0 10px;
+}
+
+#idle_inhibitor.activated {
+  color: @fg;
 }
