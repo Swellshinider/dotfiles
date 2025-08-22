@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-WALLPAPER_DIR="$HOME/Pictures/wallpapers/"
+WALLPAPER_DIR="~/Pictures/wallpapers/"
 wp="$(find "$WALLPAPER_DIR" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | shuf -n 1)"
 
 # start hyprpaper if not running
