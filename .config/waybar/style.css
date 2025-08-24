@@ -118,7 +118,8 @@ button {
 }
 
 #battery.critical:not(.charging) {
-  animation: blink 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite alternate;
+  color: rgb(255, 255, 255);
+  background-color: #f7768e;
 }
 
 #wireplumber {
