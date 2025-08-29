@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+  echo "usage: run FILE.c [-- program args...]"
+  exit 2
+fi
+
+file="$1"; shift || true
+# adjust "run foo" to "run foo.c"
+[[ "$file" != *.c ]] && file="${file}.c"
+
+if [[ ! -f "$file" ]]; then
+  echo "error: '$file' not found"
+  exit 1
+fi
+
+if ! command -v cc >/dev/null 2>&1; then
+  echo "error: no C compiler found. On Arch: sudo pacman -S --needed gcc"
+  exit 1
+fi
+
+base="$(basename "$file" .c)"
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+out="$tmpdir/$base"
+
+CFLAGS=${CFLAGS:-"-std=c11 -g -Wall -Wextra -Wpedantic"}
+LDFLAGS=${LDFLAGS:-"-lm"}  # -lm avoids the usual math link errors
+
+cc $CFLAGS "$file" -o "$out" $LDFLAGS
+"$out" "$@"
