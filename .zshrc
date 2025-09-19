@@ -47,6 +47,7 @@ alias lsa='ls --color -lah'
 alias cls='clear'
 alias poff='sync && sudo systemctl poweroff'
 alias vim='nvim'
+alias syu='sudo pacman -Syu'
 
 ###############
 # KEYBINDINGS #
