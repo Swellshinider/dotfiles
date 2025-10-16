@@ -55,11 +55,3 @@ alias syu='sudo pacman -Syu'
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
-
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
-
-# Load Path programs
-export PATH="$HOME/.local/bin:$PATH"
-chmod +x ~/.local/bin/run # set permission
