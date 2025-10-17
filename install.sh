@@ -29,7 +29,7 @@ echo "================================"
 echo "     Miscellaneous Programs     "
 echo "================================"
 sudo pacman -S git wget curl unzip tar
-sudo pacman -S alacritty
+sudo pacman -S alacritty loupe
 sudo pacman -S pipewire bluez bluez-utils blueman swaync copyq
 sudo pacman -S gst-plugin-pipewire gst-libav gst-plugins-bad gst-plugins-good gst-plugins-ugly
 sudo pacman -S mpv vlc ffmpeg imagemagick
