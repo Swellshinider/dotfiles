@@ -56,6 +56,6 @@ sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-dej
 echo "================================"
 echo "       Finalizing Setup         "
 echo "================================"
-sudo systemctl enable bluetooth
+sudo systemctl enable bluetooth.service
 sudo systemctl enable NetworkManager
 echo "Setup Complete! Please reboot your system."
