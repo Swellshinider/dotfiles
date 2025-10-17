@@ -23,7 +23,7 @@ fiX
 echo "================================"
 echo "    Hyprland and dependencies   "
 echo "================================"
-sudo pacman -S hyprland xorg-xwayland xdg-desktop-portal-hyprland waybar hyprpaper hypridle hyprlock wofi 
+sudo pacman -S hyprland xorg-xwayland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk waybar hyprpaper hypridle hyprlock hyprpicker wl-clipboard hyprshot wofi 
 
 echo "================================"
 echo "     Miscellaneous Programs     "
@@ -40,6 +40,13 @@ sudo pacman -S vivaldi nautilus discord
 yay -S visual-studio-code-bin
 yay -S oh-my-posh
 yay -S sublime-text-4
+
+# Themes
+echo "================================"
+echo "       Theme Installation       "
+echo "================================"
+sudo pacman -S breeze breeze-gtk
+sudo pacman -S qt5ct qt6ct
 
 echo "================================"
 echo "       Font Installation        "
