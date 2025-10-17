@@ -15,10 +15,9 @@ if ! command -v yay &> /dev/null; then
     makepkg -si
     cd ~
     rm -rf ~/yay_temp
-else
-    echo "yay is already installed"
-    yay -Syu
-fiX
+fi
+
+yay -Syu
 
 echo "================================"
 echo "    Hyprland and dependencies   "
@@ -52,6 +51,17 @@ echo "================================"
 echo "       Font Installation        "
 echo "================================"
 sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-dejavu ttf-fira-code ttf-roboto adobe-source-han-sans-otc-fonts woff2-font-awesome
+
+echo "================================"
+echo "    NextCloud Client Setup      "
+echo "================================"
+# Create NextCloud Directory if it doesn't exist
+NEXTCLOUD_DIR="$HOME/NextCloud"
+if [ ! -d "$NEXTCLOUD_DIR" ]; then
+    mkdir -p "$NEXTCLOUD_DIR"
+    yay -S nextcloud-client
+    echo "Created NextCloud directory at $NEXTCLOUD_DIR"
+fi
 
 echo "================================"
 echo "       Finalizing Setup         "
