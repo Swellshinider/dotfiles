@@ -39,6 +39,7 @@ sudo pacman -S vivaldi nautilus discord
 
 yay -S visual-studio-code-bin
 yay -S oh-my-posh
+yay -S sublime-text-4
 
 echo "================================"
 echo "       Font Installation        "
