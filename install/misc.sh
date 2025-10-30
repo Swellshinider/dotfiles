@@ -30,6 +30,7 @@ misc_programs=(
     "nautilus" 
     "discord" 
     "torbrowser-launcher"
+    "fastfetch"
 )
 
 sudo pacman -S "${misc_programs[@]}"
