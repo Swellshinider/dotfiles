@@ -7,6 +7,7 @@ source ./misc.sh
 source ./themes.sh
 source ./fonts.sh
 source ./nextcloud.sh
+source ./steam.sh
 
 echo "================================"
 echo "       Finalizing Setup         "

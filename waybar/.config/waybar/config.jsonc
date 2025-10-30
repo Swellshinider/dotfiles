@@ -50,13 +50,15 @@
     "icon": true,
     "tooltip": false,
     "rewrite": {
-      "Vivaldi-stable": "Vivaldi",
       "discord": "Discord",
-      "dev.zed.Zed": "Zed Editor",
       "kitty": "Kitty",
+      "steam": "Steam",
+      "Code": "VSCode",
       "librewolf": "LibreWolf",
+      "Vivaldi-stable": "Vivaldi",
+      "com.nextcloud.desktopclient.nextcloud": "Nextcloud",
       "polkit-gnome-authentication-agent-1": "Authentication",
-      "^$": "~@"
+      "^$": "󰒋 No Active Window"
     },
     "max-length": 50
   },
