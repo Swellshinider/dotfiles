@@ -34,7 +34,7 @@ sudo pacman -S gst-plugin-pipewire gst-libav gst-plugins-bad gst-plugins-good gs
 sudo pacman -S mpv vlc ffmpeg imagemagick
 sudo pacman -S pamixer pavucontrol
 sudo pacman -S grim slurp
-sudo pacman -S vivaldi nautilus discord
+sudo pacman -S vivaldi nautilus discord torbrowser-launcher
 
 yay -S visual-studio-code-bin
 yay -S oh-my-posh
