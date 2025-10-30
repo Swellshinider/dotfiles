@@ -2,7 +2,8 @@
 
 My personal dotfiles for Arch Linux, managed using [GNU Stow](https://www.gnu.org/software/stow/).
 
-
+![Preview](./docs/image.png)
+G
 ## Pre-configuration
 
 1) Install stow
@@ -23,7 +24,7 @@ cd ~/.dotfiles
 stow hypr
 ```
 
-## Hyprland autostart
+## Hyprland autostart (optional)
 
 1) Configure a service so TTY will  lauch hyprland
 ```bash
@@ -43,16 +44,16 @@ if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
 fi
 ```
 
-## Installing packages
+## Installing packages (optional)
 
 Execute this to install all the recommended packages:
 
 ```bash
-source ./install.sh
+source .install/install.sh
 ```
-Or you can just check the file **[install.sh](./install.sh)** to get whatever you want.
+Or you can just check the files in **[install](./install/)** directory to get whatever you want.
 
-## Setup zsh as default shell
+## Setup zsh as default shell (optional)
 
 ```bash
 chsh -s $(which zsh)
