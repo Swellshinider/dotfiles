@@ -28,5 +28,6 @@
     "[html][css][scss][javascript][typescript]": {
         "editor.tabSize": 2
     },
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "git.confirmSync": false
 }
