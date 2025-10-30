@@ -1,6 +1,5 @@
 # Paru dependencies
-sudo pacman -S base-devel
-sudo pacman -S rustup
+sudo pacman -S base-devel rustup
 rustup default stable
 
 if ! command -v paru &> /dev/null; then
@@ -18,5 +17,15 @@ fi
 # Update system with Paru
 paru -Syu
 
-# AUR Programs
-paru -S visual-studio-code-bin oh-my-posh sublime-text-4 1password
+# You can add or remove programs from this list to customize your installation
+aur_programs=(
+    "visual-studio-code-bin"
+    "oh-my-posh"
+    "sublime-text-4"
+    "1password"
+)
+
+echo "================================"
+echo "    Aur program Installation    "
+echo "================================"
+paru -S "${aur_programs[@]}"
