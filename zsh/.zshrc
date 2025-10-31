@@ -52,6 +52,14 @@ alias syu='sudo pacman -Syu'
 ###############
 # KEYBINDINGS #
 ###############
-bindkey -e
+bindkey -e # Use Emacs keybindings
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+
+# Move backward/forward one word with Ctrl+Arrow
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+# Move backward/forward one char Shift+Arrow
+bindkey '^[[1;2D' backward-char
+bindkey '^[[1;2C' forward-char
