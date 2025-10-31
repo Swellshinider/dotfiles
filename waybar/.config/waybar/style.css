@@ -172,6 +172,7 @@ button {
 }
 
 #custom-notification,
+#custom-logout,
 #idle_inhibitor {
   background-color: @bg;
   color: @fg;

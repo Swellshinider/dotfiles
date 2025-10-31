@@ -16,6 +16,8 @@ driver_programs=(
     "blueman" 
     "pamixer" 
     "pavucontrol"
+    "sof-firmware"
+    "alsa-utils"
 
     # Intel graphics drivers
     "xf86-video-intel"

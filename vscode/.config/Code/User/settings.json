@@ -25,7 +25,7 @@
     "[csharp][python]": {
         "editor.tabSize": 4
     },
-    "[html][css][scss][javascript][typescript]": {
+    "[html][css][scss][json][javascript][typescript]": {
         "editor.tabSize": 2
     },
     "explorer.confirmDelete": false,
