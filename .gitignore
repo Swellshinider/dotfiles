@@ -1,4 +1,7 @@
+# .gitignore for CopyQ application data files
 **/copyq_*.dat
 **/copyq_*.ini
+**/copyq-*.ini
+**/.copyq_s
 **/copyq.lock
 **/copyq.pub

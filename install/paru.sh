@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Checking for Paru installation..."
 if ! command -v paru &> /dev/null; then
     echo "================================"
     echo "       Paru Installation        "
