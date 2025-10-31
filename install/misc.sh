@@ -1,8 +1,5 @@
 # You can add or remove programs from this list to customize your installation
 misc_programs=(
-    "git"
-    "wget"
-    "curl"
     "unzip"
     "tar"
     "alacritty"
@@ -11,15 +8,24 @@ misc_programs=(
     "copyq"
     "mpv" 
     "vlc" 
-    "ffmpeg" 
     "imagemagick"
     "grim" 
     "slurp"
     "vivaldi" 
     "nautilus" 
-    "discord" 
+    "discord"
     "torbrowser-launcher"
     "fastfetch"
+
+    # Development Tools
+    "ffmpeg" 
+    "dotnet-sdk"
+    "nodejs"
+    "npm"
+    "python"
+    "git"
+    "wget"
+    "curl"
 )
 
 sudo pacman -S --noconfirm ${misc_programs[@]}
