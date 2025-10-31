@@ -1,6 +1,8 @@
+#!/bin/bash
 echo "================================"
 echo "    NextCloud Client Setup      "
 echo "================================"
+
 # Create NextCloud Directory if it doesn't exist
 NEXTCLOUD_DIR="$HOME/NextCloud"
 if [ ! -d "$NEXTCLOUD_DIR" ]; then

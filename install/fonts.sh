@@ -1,3 +1,4 @@
+#!/bin/bash
 # You can add or remove programs from this list to customize your installation
 fonts=(
     noto-fonts
@@ -14,4 +15,4 @@ fonts=(
 echo "================================"
 echo "       Fonts Installation       "
 echo "================================"
-sudo pacman -S ${fonts[@]}
+sudo pacman -S --noconfirm ${fonts[@]}

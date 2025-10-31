@@ -1,3 +1,4 @@
+#!/bin/bash
 # You can add or remove programs from this list to customize your installation
 hyprland_programs=(
     "hyprland"
@@ -17,4 +18,4 @@ hyprland_programs=(
 echo "================================"
 echo "     Hyprland Installation      "
 echo "================================"
-sudo pacman -S "${hyprland_programs[@]}"
+sudo pacman -S --noconfirm ${hyprland_programs[@]}

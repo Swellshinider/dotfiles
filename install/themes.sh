@@ -1,3 +1,4 @@
+#!/bin/bash
 # You can add or remove programs from this list to customize your installation
 themes=(
     "breeze"

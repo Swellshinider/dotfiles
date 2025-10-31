@@ -1,14 +1,18 @@
-# Paru dependencies
-sudo pacman -S base-devel rustup
-rustup default stable
-
+#!/bin/bash
 if ! command -v paru &> /dev/null; then
-    echo "Paru not found. Installing paru..."
-    git clone https://aur.archlinux.org/paru.git ~/paru
-    cd ~/paru
+    echo "================================"
+    echo "       Paru Installation        "
+    echo "================================"
+    # Install dependencies for building Paru
+    sudo pacman -S --noconfirm git base-devel rustup
+    rustup default stable
+
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
     makepkg -si
-    cd ~
-    rm -rf ~/paru
+    cd ..
+    rm -rf paru
+
     echo "Paru installation complete."
 else
     echo "Paru is already installed."
@@ -26,6 +30,6 @@ aur_programs=(
 )
 
 echo "================================"
-echo "    Aur program Installation    "
+echo "    Installing AUR programs     "
 echo "================================"
-paru -S "${aur_programs[@]}"
+paru -S ${aur_programs[@]}
