@@ -31,5 +31,14 @@
     "explorer.confirmDelete": false,
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
-    "explorer.confirmDragAndDrop": false
+    "explorer.confirmDragAndDrop": false,
+
+    // Ignore folders in workspace that (bin, obj, .venv, .git etc)
+    "files.exclude": {
+        "**/bin/": true,
+        "**/obj/": true,
+        "**/.venv/": true,
+        "**/.git/": true,
+        "**/node_modules/": true
+    }
 }
