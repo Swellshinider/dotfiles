@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Set the battery percentage levels
-WARNING_LEVEL=15
-CRITICAL_LEVEL=5
+WARNING_LEVEL=20
+CRITICAL_LEVEL=10
 
 # Path to battery
 # Check yours /sys/class/power_supply/ if this fails
@@ -17,17 +17,15 @@ while true; do
         
         # Critical notification
         if [ "$CAPACITY" -le $CRITICAL_LEVEL ]; then
-            # Warn only once
             if [ ! -f /tmp/battery_critical_notified ]; then
-                notify-send -u critical "Battery Critical!" "Only $CAPACITY% remaining. Plug in now!"
+                notify-send --app-name="System Notification" --icon="$HOME/.config/hypr/images/empty-battery.png" --urgency=critical "Battery Critical!" "Only $CAPACITY% remaining. Plug in now!"
                 touch /tmp/battery_critical_notified
             fi
         
         # Warning notification
         elif [ "$CAPACITY" -le $WARNING_LEVEL ]; then
-            # Warn only once
             if [ ! -f /tmp/battery_warning_notified ]; then
-                notify-send -u normal "Battery Low" "$CAPACITY% remaining."
+                notify-send --app-name="System Notification" --icon="$HOME/.config/hypr/images/low-battery.png" --urgency=normal "Battery Low!" "$CAPACITY% remaining. Please consider plugging in."
                 touch /tmp/battery_warning_notified
             fi
         fi
