@@ -28,7 +28,6 @@ aur_programs=(
     "oh-my-posh"
     "sublime-text-4"
     "wlogout"
-    "1password"
 )
 
 echo "================================"

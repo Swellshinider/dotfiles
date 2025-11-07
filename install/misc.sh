@@ -16,6 +16,8 @@ misc_programs=(
     "discord"
     "torbrowser-launcher"
     "fastfetch"
+    "gimp"
+    "bitwarden"
 
     # Development Tools
     "ffmpeg" 
