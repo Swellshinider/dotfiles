@@ -1,44 +1,45 @@
 {
-    "editor.fontSize": 16,
-    "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
-    "editor.stickyScroll.enabled": false,
+  "editor.fontSize": 16,
+  "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
+  "editor.stickyScroll.enabled": false,
+  
+  "workbench.panel.showLabels": false,
+  "workbench.activityBar.location": "hidden",
+  "workbench.editor.splitSizing": "split",
 
-    "workbench.panel.showLabels": false,
-    "workbench.activityBar.location": "hidden",
-    "workbench.editor.splitSizing": "split",
+  "window.zoomLevel": 1,
+  "window.titleBarStyle": "custom",
+  "window.menuBarVisibility": "toggle",
+  "window.customTitleBarVisibility": "never",
 
-    "window.zoomLevel": 1,
-    "window.titleBarStyle": "custom",
-    "window.menuBarVisibility": "toggle",
-    "window.customTitleBarVisibility": "never",
-    
-    "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 500,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
 
-    "github.copilot.enable": {
-        "*": true,
-        "plaintext": false,
-        "markdown": true,
-        "scminput": false
-    },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
 
-    "[csharp][python]": {
-        "editor.tabSize": 4
-    },
-    "[html][css][scss][json][javascript][typescript]": {
-        "editor.tabSize": 2
-    },
-    "explorer.confirmDelete": false,
-    "git.confirmSync": false,
-    "git.enableSmartCommit": true,
-    "explorer.confirmDragAndDrop": false,
+  "[csharp][python]": {
+    "editor.tabSize": 4
+  },
+  "[html][css][scss][json][jsonc][javascript][typescript]": {
+    "editor.tabSize": 2
+  },
 
-    // Ignore folders in workspace that (bin, obj, .venv, .git etc)
-    "files.exclude": {
-        "**/bin/": true,
-        "**/obj/": true,
-        "**/.venv/": true,
-        "**/.git/": true,
-        "**/node_modules/": true
-    }
+  "explorer.confirmDelete": false,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "explorer.confirmDragAndDrop": false,
+
+  // Ignore folders in workspace that (bin, obj, .venv, .git etc)
+  "files.exclude": {
+    "**/bin/": true,
+    "**/obj/": true,
+    "**/.venv/": true,
+    "**/.git/": true,
+    "**/node_modules/": true
+  }
 }

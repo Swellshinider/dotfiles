@@ -19,10 +19,7 @@ source ./misc.sh
 source ./steam.sh
 source ./nextcloud.sh
 
-echo "================================"
-echo "       Finalizing Setup         "
-echo "================================"
-sudo systemctl enable bluetooth.service
-systemctl --user --now enable wireplumber
+# Enable services
+source ./up_services.sh
 
 echo "Setup Complete! Please reboot your system."

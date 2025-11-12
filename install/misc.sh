@@ -3,6 +3,7 @@ misc_programs=(
     "unzip"
     "tar"
     "alacritty"
+    "kitty"
     "loupe"
     "swaync" 
     "copyq"
