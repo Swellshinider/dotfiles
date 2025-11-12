@@ -19,6 +19,7 @@ misc_programs=(
     "fastfetch"
     "gimp"
     "bitwarden"
+    "xdg-user-dirs"
 
     # Development Tools
     "ffmpeg" 
@@ -32,3 +33,4 @@ misc_programs=(
 )
 
 sudo pacman -S --noconfirm ${misc_programs[@]}
+xdg-user-dirs-update
