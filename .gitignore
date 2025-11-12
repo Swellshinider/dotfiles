@@ -6,3 +6,8 @@
 **/.copyq_s
 **/copyq.lock
 **/copyq.pub
+
+# vscode files, but we keep settings and keybindings
+**/vscode/
+!**/keybindings.json
+!**/settings.json

@@ -37,19 +37,14 @@ sudo nano /etc/systemd/system/getty@tty1.service.d/autologin.conf
 ExecStart=
 ExecStart=-/usr/bin/agetty --autologin USERNAME --noclear %I $TERM
 ```
-3) Add this to your ***~/bash_profile***:
-```text
-if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-    exec Hyprland
-fi
-```
 
 ## Installing packages (optional)
 
 Execute this to install all the recommended packages:
 
 ```bash
-source .install/install.sh
+cd ~.dotfiles/install/
+source install.sh
 ```
 Or you can just check the files in **[install](./install/)** directory to get whatever you want.
 
