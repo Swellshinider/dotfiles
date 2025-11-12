@@ -8,7 +8,6 @@ driver_programs=(
     "gst-plugins-ugly"
     "pipewire"
     "pipewire-pulse" 
-    "pipewire-jack" 
     "pipewire-alsa" 
     "wireplumber"
     "bluez" 
