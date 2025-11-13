@@ -1,6 +1,8 @@
 #!/bin/bash
 # You can add or remove programs from this list to customize your installation
 driver_programs=(
+    "networkmanager"
+    "network-manager-applet"
     "gst-plugin-pipewire" 
     "gst-libav" 
     "gst-plugins-bad" 
@@ -10,6 +12,7 @@ driver_programs=(
     "pipewire-pulse" 
     "pipewire-alsa" 
     "wireplumber"
+    "brightnessctl"
     "bluez" 
     "bluez-utils" 
     "blueman" 
