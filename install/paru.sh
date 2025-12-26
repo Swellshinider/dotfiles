@@ -1,19 +1,7 @@
 #!/bin/bash
 echo "Checking for Paru installation..."
 if ! command -v paru &> /dev/null; then
-    echo "================================"
-    echo "       Paru Installation        "
-    echo "================================"
-    # Install dependencies for building Paru
-    sudo pacman -S --noconfirm git base-devel rustup
-    rustup default stable
-
-    git clone https://aur.archlinux.org/paru.git
-    cd paru
-    makepkg -si
-    cd ..
-    rm -rf paru
-
+    source ./paru_update.sh 
     echo "Paru installation complete."
 else
     echo "Paru is already installed."
