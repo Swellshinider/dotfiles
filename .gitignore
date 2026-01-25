@@ -2,6 +2,7 @@
 **/copyq_*.dat
 **/copyq_*.ini
 **/copyq_*.ini.lock
+**/copyq_*.ini.lock.rmlock
 **/copyq-*.ini
 **/.copyq_s
 **/copyq.lock

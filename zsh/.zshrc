@@ -63,3 +63,6 @@ bindkey '^[[1;5D' backward-word
 # Move backward/forward one char Shift+Arrow
 bindkey '^[[1;2D' backward-char
 bindkey '^[[1;2C' forward-char
+
+# Export PATH
+export PATH="$PATH:$(npm config get prefix)/bin" # Add npm global packages to PATH
