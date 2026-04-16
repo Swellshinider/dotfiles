@@ -10,5 +10,5 @@
 
 # vscode files, but we keep settings and keybindings
 **/vscode/
-!**/keybindings.json
-!**/settings.json
+!**/vscode/keybindings.json
+!**/vscode/settings.json
