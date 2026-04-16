@@ -1,23 +1,26 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 36,
+  "height": 42,
   "spacing": 0,
-  "margin": "5 10 0 10",
-  // spacer
-  "custom/spacer": {
-    "format": "  ",
-    "tooltip": false
-  },
-  // separator
-  "custom/separator": {
-    "format": "/",
-    "tooltip": false
-  },
+  "margin": "0 5 0 5",
   // Left modules
   "modules-left": [
+    "group/island-launcher",
     "hyprland/workspaces"
   ],
+  "group/island-launcher": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/search"
+    ]
+  },
+  "custom/search": {
+    "format": "󰍉",
+    "tooltip": true,
+    "tooltip-format": "App Search",
+    "on-click": "~/.config/hypr/scripts/wofi_popup_launcher.sh"
+  },
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
@@ -67,22 +70,60 @@
   },
   // Right modules
   "modules-right": [
-    "backlight",
-    "custom/separator",
-    "battery",
-    "custom/separator",
-    "wireplumber",
-    "custom/separator",
-    "clock#time",
-    "clock#date",
-    "custom/separator",
-    "tray",
-    "custom/separator",
-    "idle_inhibitor",
-    "custom/notification",
-    "custom/separator",
-    "custom/logout"
+    "group/island-display",
+    "group/island-audio",
+    "group/island-clock",
+    "group/island-status",
+    "group/island-network",
+    "group/island-bluetooth",
+    "group/island-session"
   ],
+  "group/island-display": {
+    "orientation": "horizontal",
+    "modules": [
+      "backlight",
+      "battery"
+    ]
+  },
+  "group/island-audio": {
+    "orientation": "horizontal",
+    "modules": [
+      "wireplumber"
+    ]
+  },
+  "group/island-clock": {
+    "orientation": "horizontal",
+    "modules": [
+      "clock#time",
+      "clock#date"
+    ]
+  },
+  "group/island-status": {
+    "orientation": "horizontal",
+    "modules": [
+      "tray",
+      "idle_inhibitor",
+      "custom/notification"
+    ]
+  },
+  "group/island-session": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/logout"
+    ]
+  },
+  "group/island-network": {
+    "orientation": "horizontal",
+    "modules": [
+      "network"
+    ]
+  },
+  "group/island-bluetooth": {
+    "orientation": "horizontal",
+    "modules": [
+      "bluetooth"
+    ]
+  },
   // Backlight module
   "backlight": {
     "format": "  {percent}%",
@@ -134,9 +175,9 @@
   // Clock
   "clock#time": {
     "format": "{:%H:%M}",
-    "tooltip-format": "{:%A}",
+    "tooltip-format": "Click to open <b>Clocks</b>",
     "signal": 3,
-    "tooltip": false,
+    "tooltip": true,
     "on-click": "gnome-clocks"
   },
   "clock#date": {
@@ -149,6 +190,39 @@
     "icon-size": 18,
     "spacing": 8,
     "show-passive-items": true
+  },
+  // Network
+  "network": {
+    "format-wifi": "{icon} {essid}",
+    "format-ethernet": "󰈀 Ethernet",
+    "format-linked": "󰈀 No IP",
+    "format-disconnected": "󰖪 Offline",
+    "format-disabled": "󰖪 Off",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "{ifname}",
+    "tooltip-format-disconnected": "Disconnected",
+    "format-icons": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+    ],
+    "max-length": 40,
+    "on-click": "nm-connection-editor"
+  },
+  // Bluetooth
+  "bluetooth": {
+    "format-disabled": "󰂲 Off",
+    "format-off": "󰂲 Off",
+    "format-on": "󰂯 On",
+    "format-connected": "󰂯 {device_alias}",
+    "format-connected-battery": "󰂯 {device_alias} {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}",
+    "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "max-length": 40,
+    "on-click": "blueman-manager"
   },
   // Coffef inhibitor
   "idle_inhibitor": {

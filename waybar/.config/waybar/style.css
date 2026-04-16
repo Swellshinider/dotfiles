@@ -12,6 +12,11 @@
 @define-color it @bg;
 @define-color border @color1;
 @define-color tt @fg;
+@define-color island rgba(17, 19, 29, 0.88);
+@define-color island-border rgba(192, 202, 245, 0.12);
+@define-color island-divider rgba(192, 202, 245, 0.08);
+@define-color accent-cool rgba(122, 162, 247, 0.18);
+@define-color accent-warm rgba(224, 175, 104, 0.18);
 
 .modules-left>widget\:first-child>#workspaces {
   margin-left: 0;
@@ -24,7 +29,7 @@
 #waybar {
   color: #c0caf5;
   border-radius: 5px 5px 5px 5px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
 }
 
 tooltip {
@@ -37,23 +42,18 @@ tooltip label {
   color: @tt;
 }
 
-button {
-  border: none;
-  border-radius: 0;
-  padding: 0 5px;
-  transition: all 0.2s ease;
-}
-
 #workspaces {
-  background-color: @bg;
-  border-radius: 10px;
+  background-color: @island;
+  border: 1px solid @island-border;
+  border-radius: 14px;
   margin: 5px;
-  padding: 2px;
+  padding: 3px 5px;
 }
 
 #workspaces button {
   background-color: transparent;
   color: #d3bc94;
+  border: none;
   border-radius: 6px;
   margin: 0 2px;
   padding: 0 8px;
@@ -67,7 +67,7 @@ button {
 
 #workspaces button.active {
   color: @color15;
-  background-color: @color1;
+  background-color: @accent-cool;
   font-weight: bold;
 }
 
@@ -80,37 +80,92 @@ button {
   color: #1a1b26;
 }
 
-#custom-spacer {
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-#custom-separator {
-  padding: 0px;
-}
-
-#window {
-  background-color: @bg;
-  color: @fg;
-  padding: 0 12px;
-  border-radius: 10px;
+#window,
+#island-launcher,
+#island-display,
+#island-audio,
+#island-clock,
+#island-status,
+#island-session,
+#island-network,
+#island-bluetooth {
+  background-color: @island;
+  border: 1px solid @island-border;
+  border-radius: 14px;
   margin: 5px;
 }
 
-#backlight {
-  background-color: @ic;
-  color: @it;
+#window {
+  color: @fg;
+  padding: 0 14px;
+}
+
+#island-launcher {
+  border-color: rgba(187, 154, 247, 0.22);
+}
+
+#island-display {
+  border-color: @accent-warm;
+}
+
+#island-audio,
+#island-clock {
+  border-color: @accent-cool;
+}
+
+#island-network,
+#island-bluetooth {
+  border-color: rgba(158, 206, 106, 0.2);
+}
+
+#island-status,
+#island-session {
+  border-color: @island-border;
+}
+
+#backlight,
+#battery,
+#wireplumber,
+#custom-search,
+#clock.time,
+#clock.date,
+#tray,
+#idle_inhibitor,
+#custom-notification,
+#custom-logout,
+#network,
+#bluetooth {
+  background-color: transparent;
+  color: @fg;
+  margin: 0;
   padding: 0 12px;
-  border-radius: 10px 0 0 10px;
-  margin: 5px 0 5px 5px;
+}
+
+#backlight,
+#battery,
+#wireplumber {
+  color: @color12;
+}
+
+#custom-search {
+  color: #bb9af7;
+  padding: 0 15px 0 13px;
+  font-size: 18px;
+}
+
+#backlight,
+#clock.time,
+#tray,
+#idle_inhibitor {
+  border-right: 1px solid @island-divider;
+}
+
+#backlight {
+  padding-left: 14px;
 }
 
 #battery {
-  background-color: @ic;
-  color: @it;
-  padding: 0 12px;
-  border-radius: 10px 0 0 10px;
-  margin: 5px 0 5px 5px;
+  padding-right: 14px;
 }
 
 #battery.charging {
@@ -123,27 +178,16 @@ button {
 }
 
 #wireplumber {
-  background-color: @ic;
-  color: @it;
-  padding: 0 12px;
-  border-radius: 10px 0 0 10px;
-  margin: 5px 0 5px 5px;
+  padding: 0 14px;
 }
 
 #clock.time {
-  background-color: @ic;
-  color: @it;
-  padding: 0 12px;
-  border-radius: 10px 0 0 10px;
-  margin: 5px 0 5px 5px;
+  color: @color12;
+  padding-left: 14px;
 }
 
 #clock.date {
-  background-color: @bg;
-  color: @fg;
-  padding: 0 12px;
-  border-radius: 0 10px 10px 0;
-  margin: 5px 5px 5px 0;
+  padding-right: 14px;
 }
 
 
@@ -156,10 +200,8 @@ button {
 
 
 #tray {
-  background-color: @bg;
-  padding: 0 10px;
-  border-radius: 10px;
-  margin: 5px;
+  padding-left: 14px;
+  padding-right: 12px;
 }
 
 #tray>.passive {
@@ -174,11 +216,18 @@ button {
 #custom-notification,
 #custom-logout,
 #idle_inhibitor {
-  background-color: @bg;
-  color: @fg;
-  border-radius: 10px;
-  margin: 5px;
-  padding: 0 10px;
+  padding: 0 12px;
+}
+
+#custom-notification,
+#custom-logout {
+  padding-right: 14px;
+}
+
+#network,
+#bluetooth {
+  color: @color15;
+  padding: 0 14px;
 }
 
 #idle_inhibitor.activated {
