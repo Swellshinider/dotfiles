@@ -66,3 +66,4 @@ bindkey '^[[1;2C' forward-char
 
 # Export PATH
 export PATH="$PATH:$(npm config get prefix)/bin" # Add npm global packages to PATH
+export PATH="$HOME/.local/bin:$PATH" # Add ~/.local/bin to PATH

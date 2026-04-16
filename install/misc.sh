@@ -20,6 +20,8 @@ misc_programs=(
     "gimp"
     "bitwarden"
     "xdg-user-dirs"
+    "gnome-clocks"
+    "gnome-calendar"
 
     # Development Tools
     "ffmpeg" 

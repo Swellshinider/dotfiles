@@ -54,8 +54,11 @@
       "kitty": "Kitty",
       "steam": "Steam",
       "Code": "VSCode",
+      "firefox": "Firefox",
       "librewolf": "LibreWolf",
       "Vivaldi-stable": "Vivaldi",
+      "org.gnome.Nautilus": "Nautilus",
+      "org.gnome.clocks": "Clocks",
       "com.nextcloud.desktopclient.nextcloud": "Nextcloud",
       "polkit-gnome-authentication-agent-1": "Authentication",
       "^$": "󰒋 No Active Window"
@@ -74,6 +77,7 @@
     "clock#date",
     "custom/separator",
     "tray",
+    "custom/separator",
     "idle_inhibitor",
     "custom/notification",
     "custom/separator",
@@ -138,7 +142,7 @@
   "clock#date": {
     "format": "{:%d/%m/%Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
-    "on-click": "gnome-clocks"
+    "on-click": "gnome-calendar"
   },
   // System tray
   "tray": {
