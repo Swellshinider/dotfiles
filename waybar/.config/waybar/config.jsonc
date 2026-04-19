@@ -208,7 +208,6 @@
       "󰤥",
       "󰤨"
     ],
-    "max-length": 40,
     "on-click": "nm-connection-editor"
   },
   // Bluetooth
@@ -221,7 +220,6 @@
     "tooltip-format": "{controller_alias}",
     "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
-    "max-length": 40,
     "on-click": "blueman-manager"
   },
   // Coffef inhibitor
