@@ -7,8 +7,6 @@
   // Left modules
   "modules-left": [
     "group/island-launcher",
-    "group/island-network",
-    "group/island-bluetooth",
     "hyprland/workspaces"
   ],
   "group/island-launcher": {
@@ -74,6 +72,8 @@
   "modules-right": [
     "group/island-display",
     "group/island-audio",
+    "group/island-network",
+    "group/island-bluetooth",
     "group/island-clock",
     "group/island-status",
     "group/island-session"
@@ -205,11 +205,11 @@
   },
   // Network
   "network": {
-    "format-wifi": "{icon} {essid}",
-    "format-ethernet": "󰈀 Ethernet",
-    "format-linked": "󰈀 No IP",
-    "format-disconnected": "󰖪 Offline",
-    "format-disabled": "󰖪 Off",
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰈀",
+    "format-linked": "󰈀",
+    "format-disconnected": "󰖪",
+    "format-disabled": "󰖪",
     "tooltip-format-wifi": "{essid} ({signalStrength}%)",
     "tooltip-format-ethernet": "{ifname}",
     "tooltip-format-disconnected": "Disconnected",
@@ -224,9 +224,9 @@
   },
   // Bluetooth
   "bluetooth": {
-    "format-disabled": "󰂲 Off",
-    "format-off": "󰂲 Off",
-    "format-on": "󰂯 On",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-on": "󰂯",
     "format-connected": "󰂯 {device_alias}",
     "format-connected-battery": "󰂯 {device_alias} {device_battery_percentage}%",
     "tooltip-format": "{controller_alias}",
