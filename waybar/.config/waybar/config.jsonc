@@ -7,6 +7,8 @@
   // Left modules
   "modules-left": [
     "group/island-launcher",
+    "group/island-network",
+    "group/island-bluetooth",
     "hyprland/workspaces"
   ],
   "group/island-launcher": {
@@ -74,14 +76,13 @@
     "group/island-audio",
     "group/island-clock",
     "group/island-status",
-    "group/island-network",
-    "group/island-bluetooth",
     "group/island-session"
   ],
   "group/island-display": {
     "orientation": "horizontal",
     "modules": [
       "backlight",
+      "custom/power-profile",
       "battery"
     ]
   },
@@ -128,6 +129,17 @@
   "backlight": {
     "format": "  {percent}%",
     "tooltip": false
+  },
+  "custom/power-profile": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "power-profile current --json",
+    "interval": 30,
+    "signal": 8,
+    "tooltip": true,
+    "on-click": "power-profile menu",
+    "on-scroll-up": "power-profile cycle next",
+    "on-scroll-down": "power-profile cycle prev"
   },
   // Battery
   "battery": {

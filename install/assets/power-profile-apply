@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+state_dir="/var/lib/power-profile"
+state_file="$state_dir/current"
+
+usage() {
+  cat <<'EOF'
+usage: power-profile-apply <performance|balanced|powersave|ultra|restore>
+EOF
+}
+
+detect_wireless_iface() {
+  local candidate
+
+  for candidate in /sys/class/net/*/wireless; do
+    [[ -e "$candidate" ]] || continue
+    basename "$(dirname "$candidate")"
+    return 0
+  done
+
+  return 1
+}
+
+set_if_writable() {
+  local value="$1"
+  local path="$2"
+
+  [[ -w "$path" ]] || return 0
+  printf '%s' "$value" >"$path"
+}
+
+set_policy_value() {
+  local relative_path="$1"
+  local value="$2"
+  local path
+
+  for path in /sys/devices/system/cpu/cpufreq/policy*/"$relative_path"; do
+    [[ -w "$path" ]] || continue
+    printf '%s' "$value" >"$path"
+  done
+}
+
+set_platform_profile() {
+  local requested="$1"
+  local profile_path="/sys/firmware/acpi/platform_profile"
+  local choices_path="/sys/firmware/acpi/platform_profile_choices"
+  local choices
+
+  [[ -w "$profile_path" ]] || return 0
+  if [[ -r "$choices_path" ]]; then
+    choices="$(tr -d '\n' <"$choices_path")"
+    if [[ " $choices " != *" $requested "* ]]; then
+      return 0
+    fi
+  fi
+
+  printf '%s' "$requested" >"$profile_path"
+}
+
+set_wifi_power_save() {
+  local requested="$1"
+  local iface
+
+  command -v iw >/dev/null 2>&1 || return 0
+  iface="$(detect_wireless_iface)" || return 0
+  iw dev "$iface" set power_save "$requested" >/dev/null 2>&1 || true
+}
+
+apply_mode() {
+  local mode="$1"
+  local platform governor epp no_turbo max_perf wifi_power
+
+  case "$mode" in
+    performance)
+      platform="performance"
+      governor="performance"
+      epp="performance"
+      no_turbo="0"
+      max_perf="100"
+      wifi_power="off"
+      ;;
+    balanced)
+      platform="balanced"
+      governor="powersave"
+      epp="balance_performance"
+      no_turbo="0"
+      max_perf="100"
+      wifi_power="off"
+      ;;
+    powersave)
+      platform="quiet"
+      governor="powersave"
+      epp="balance_power"
+      no_turbo="1"
+      max_perf="70"
+      wifi_power="on"
+      ;;
+    ultra)
+      platform="quiet"
+      governor="powersave"
+      epp="power"
+      no_turbo="1"
+      max_perf="45"
+      wifi_power="on"
+      ;;
+    *)
+      printf 'power-profile-apply: unknown mode: %s\n' "$mode" >&2
+      return 1
+      ;;
+  esac
+
+  mkdir -p "$state_dir"
+  set_platform_profile "$platform"
+  set_policy_value scaling_governor "$governor"
+  set_policy_value energy_performance_preference "$epp"
+  set_if_writable "$no_turbo" /sys/devices/system/cpu/intel_pstate/no_turbo
+  set_if_writable "$max_perf" /sys/devices/system/cpu/intel_pstate/max_perf_pct
+  set_wifi_power_save "$wifi_power"
+  printf '%s\n' "$mode" >"$state_file"
+}
+
+main() {
+  local mode="${1:-}"
+
+  [[ "${EUID:-$(id -u)}" -eq 0 ]] || {
+    printf 'power-profile-apply: must run as root\n' >&2
+    exit 1
+  }
+
+  case "$mode" in
+    restore)
+      if [[ -r "$state_file" ]]; then
+        mode="$(tr -d '\n' <"$state_file")"
+      else
+        mode="balanced"
+      fi
+      ;;
+    performance|balanced|powersave|ultra)
+      ;;
+    ""|-h|--help|help)
+      usage
+      exit 0
+      ;;
+    *)
+      usage >&2
+      exit 1
+      ;;
+  esac
+
+  apply_mode "$mode"
+}
+
+main "$@"

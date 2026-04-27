@@ -124,6 +124,7 @@ tooltip label {
 }
 
 #backlight,
+#custom-power-profile,
 #battery,
 #wireplumber,
 #custom-search,
@@ -142,6 +143,7 @@ tooltip label {
 }
 
 #backlight,
+#custom-power-profile,
 #battery,
 #wireplumber {
   color: @color12;
@@ -154,6 +156,7 @@ tooltip label {
 }
 
 #backlight,
+#custom-power-profile,
 #clock.time,
 #tray,
 #idle_inhibitor {
@@ -166,6 +169,27 @@ tooltip label {
 
 #battery {
   padding-right: 14px;
+}
+
+#custom-power-profile {
+  min-width: 84px;
+  padding: 0 12px;
+}
+
+#custom-power-profile.performance {
+  color: #f6bd60;
+}
+
+#custom-power-profile.balanced {
+  color: #7aa2f7;
+}
+
+#custom-power-profile.powersave {
+  color: #9ece6a;
+}
+
+#custom-power-profile.ultra {
+  color: #73daca;
 }
 
 #battery.charging {

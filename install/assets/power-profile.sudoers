@@ -1,0 +1,3 @@
+Cmnd_Alias POWER_PROFILE_SWITCH = /usr/local/libexec/power-profile-apply performance, /usr/local/libexec/power-profile-apply balanced, /usr/local/libexec/power-profile-apply powersave, /usr/local/libexec/power-profile-apply ultra
+
+%wheel ALL=(root) NOPASSWD: POWER_PROFILE_SWITCH

@@ -1,0 +1,11 @@
+[Unit]
+Description=Restore the saved power profile
+ConditionPathExists=/usr/local/libexec/power-profile-apply
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/libexec/power-profile-apply restore
+
+[Install]
+WantedBy=multi-user.target

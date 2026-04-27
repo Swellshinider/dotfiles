@@ -18,6 +18,7 @@ source ./hyprland.sh
 source ./misc.sh
 source ./steam.sh
 source ./nextcloud.sh
+source ./power_profiles.sh
 
 # Enable services
 source ./up_services.sh

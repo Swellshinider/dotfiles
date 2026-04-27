@@ -3,6 +3,7 @@ misc_programs=(
     "unzip"
     "tar"
     "alacritty"
+    "brightnessctl"
     "kitty"
     "loupe"
     "swaync" 
@@ -32,6 +33,7 @@ misc_programs=(
     "git"
     "wget"
     "curl"
+    "iw"
 )
 
 sudo pacman -S --noconfirm ${misc_programs[@]}

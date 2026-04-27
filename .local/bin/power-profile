@@ -1,0 +1,301 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+helper_path="/usr/local/libexec/power-profile-apply"
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/power-profile"
+brightness_state="$state_dir/brightness.restore"
+system_state="/var/lib/power-profile/current"
+waybar_signal="8"
+ultra_brightness="35"
+profiles=(performance balanced powersave ultra)
+
+usage() {
+  cat <<'EOF'
+usage: power-profile <command> [args...]
+
+Commands:
+  current [--json]          Print the active profile
+  apply <profile>           Apply a profile via the root helper
+  cycle <next|prev>         Cycle through profiles
+  menu                      Pick a profile through wofi
+EOF
+}
+
+notify_error() {
+  local message="$1"
+  if command -v notify-send >/dev/null 2>&1; then
+    notify-send --app-name="Power Profile" --urgency=critical "Power profile" "$message"
+  fi
+}
+
+json_escape() {
+  local value="${1//\\/\\\\}"
+  value="${value//\"/\\\"}"
+  value="${value//$'\n'/\\n}"
+  printf '%s' "$value"
+}
+
+read_system_value() {
+  local path="$1"
+  if [[ -r "$path" ]]; then
+    tr -d '\n' <"$path"
+  fi
+}
+
+current_profile() {
+  local mode
+
+  if [[ -r "$system_state" ]]; then
+    mode="$(tr -d '\n' <"$system_state")"
+    if [[ " ${profiles[*]} " == *" $mode "* ]]; then
+      printf '%s\n' "$mode"
+      return 0
+    fi
+  fi
+
+  local governor epp no_turbo max_perf
+  governor="$(read_system_value /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor)"
+  epp="$(read_system_value /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference)"
+  no_turbo="$(read_system_value /sys/devices/system/cpu/intel_pstate/no_turbo)"
+  max_perf="$(read_system_value /sys/devices/system/cpu/intel_pstate/max_perf_pct)"
+
+  case "${governor}:${epp}:${no_turbo}:${max_perf}" in
+    performance:performance:0:100)
+      printf 'performance\n'
+      ;;
+    powersave:power:1:45)
+      printf 'ultra\n'
+      ;;
+    powersave:balance_power:1:70)
+      printf 'powersave\n'
+      ;;
+    *)
+      printf 'balanced\n'
+      ;;
+  esac
+}
+
+profile_label() {
+  case "$1" in
+    performance) printf 'Perf' ;;
+    balanced) printf 'Bal' ;;
+    powersave) printf 'Save' ;;
+    ultra) printf 'Ultra' ;;
+  esac
+}
+
+profile_menu_label() {
+  case "$1" in
+    performance) printf 'Performance' ;;
+    balanced) printf 'Balanced' ;;
+    powersave) printf 'Power Saving' ;;
+    ultra) printf 'Ultra Power Saving' ;;
+  esac
+}
+
+profile_icon() {
+  case "$1" in
+    performance) printf '' ;;
+    balanced) printf '' ;;
+    powersave) printf '' ;;
+    ultra) printf '' ;;
+  esac
+}
+
+build_tooltip() {
+  local platform governor epp no_turbo max_perf
+  platform="$(read_system_value /sys/firmware/acpi/platform_profile)"
+  governor="$(read_system_value /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor)"
+  epp="$(read_system_value /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference)"
+  no_turbo="$(read_system_value /sys/devices/system/cpu/intel_pstate/no_turbo)"
+  max_perf="$(read_system_value /sys/devices/system/cpu/intel_pstate/max_perf_pct)"
+
+  printf 'Platform: %s\nGovernor: %s\nEPP: %s\nTurbo: %s\nCap: %s%%' \
+    "${platform:-unknown}" \
+    "${governor:-unknown}" \
+    "${epp:-unknown}" \
+    "$( [[ "${no_turbo:-1}" == "0" ]] && printf 'on' || printf 'off' )" \
+    "${max_perf:-unknown}"
+}
+
+read_brightness_percent() {
+  local max current
+
+  command -v brightnessctl >/dev/null 2>&1 || return 1
+  max="$(brightnessctl m 2>/dev/null)" || return 1
+  current="$(brightnessctl g 2>/dev/null)" || return 1
+  awk -v current="$current" -v max="$max" 'BEGIN {
+    if (max <= 0) {
+      exit 1
+    }
+    printf "%.0f\n", (current / max) * 100
+  }'
+}
+
+save_brightness_state() {
+  local current
+
+  current="$(read_brightness_percent)" || return 0
+  mkdir -p "$state_dir"
+  printf '%s\n' "$current" >"$brightness_state"
+}
+
+enforce_ultra_brightness() {
+  local current
+
+  current="$(read_brightness_percent)" || return 0
+  if (( current > ultra_brightness )); then
+    save_brightness_state
+    brightnessctl -q set "${ultra_brightness}%"
+  else
+    save_brightness_state
+  fi
+}
+
+restore_brightness_if_safe() {
+  local current saved
+
+  [[ -r "$brightness_state" ]] || return 0
+  current="$(read_brightness_percent)" || return 0
+  saved="$(tr -d '\n' <"$brightness_state")"
+
+  if [[ "$saved" =~ ^[0-9]+$ ]] && (( current <= ultra_brightness )); then
+    brightnessctl -q set "${saved}%"
+  fi
+
+  rm -f "$brightness_state"
+}
+
+signal_waybar() {
+  pkill -RTMIN+"$waybar_signal" waybar >/dev/null 2>&1 || true
+}
+
+apply_profile() {
+  local target="$1"
+  local previous
+
+  previous="$(current_profile)"
+
+  if [[ ! -x "$helper_path" ]]; then
+    notify_error "Install the root helper with install/power_profiles.sh first."
+    printf 'power-profile: %s is not installed\n' "$helper_path" >&2
+    return 1
+  fi
+
+  if [[ "$target" == "ultra" && "$previous" != "ultra" ]]; then
+    enforce_ultra_brightness
+  fi
+
+  if ! sudo -n "$helper_path" "$target"; then
+    if [[ "$target" == "ultra" && "$previous" != "ultra" ]]; then
+      restore_brightness_if_safe
+    fi
+    notify_error "Failed to switch to $(profile_menu_label "$target"). Check sudoers setup."
+    return 1
+  fi
+
+  if [[ "$target" != "ultra" && "$previous" == "ultra" ]]; then
+    restore_brightness_if_safe
+  fi
+
+  signal_waybar
+}
+
+cycle_profile() {
+  local direction="$1"
+  local current index next_index
+  current="$(current_profile)"
+
+  for index in "${!profiles[@]}"; do
+    if [[ "${profiles[$index]}" == "$current" ]]; then
+      case "$direction" in
+        next) next_index=$(( (index + 1) % ${#profiles[@]} )) ;;
+        prev) next_index=$(( (index + ${#profiles[@]} - 1) % ${#profiles[@]} )) ;;
+        *)
+          printf 'power-profile: invalid cycle direction: %s\n' "$direction" >&2
+          return 1
+          ;;
+      esac
+      apply_profile "${profiles[$next_index]}"
+      return 0
+    fi
+  done
+
+  printf 'power-profile: could not determine current profile\n' >&2
+  return 1
+}
+
+show_menu() {
+  local current choice label
+  current="$(current_profile)"
+  choice="$(
+    {
+      for label in "${profiles[@]}"; do
+        if [[ "$label" == "$current" ]]; then
+          printf '%s  %s  [current]\n' "$(profile_icon "$label")" "$(profile_menu_label "$label")"
+        else
+          printf '%s  %s\n' "$(profile_icon "$label")" "$(profile_menu_label "$label")"
+        fi
+      done
+    } | wofi --dmenu --prompt "Power profile" --width 360 --height 240
+  )" || return 0
+
+  case "$choice" in
+    *Performance*) apply_profile performance ;;
+    *Balanced*) apply_profile balanced ;;
+    *Ultra\ Power\ Saving*) apply_profile ultra ;;
+    *Power\ Saving*) apply_profile powersave ;;
+  esac
+}
+
+print_current() {
+  local mode label icon tooltip
+  mode="$(current_profile)"
+
+  if [[ "${1:-}" == "--json" ]]; then
+    label="$(profile_label "$mode")"
+    icon="$(profile_icon "$mode")"
+    tooltip="$(build_tooltip)"
+    printf '{"text":"%s %s","class":"%s","tooltip":"%s"}\n' \
+      "$(json_escape "$icon")" \
+      "$(json_escape "$label")" \
+      "$(json_escape "$mode")" \
+      "$(json_escape "$tooltip")"
+    return 0
+  fi
+
+  printf '%s\n' "$mode"
+}
+
+main() {
+  local command="${1:-}"
+
+  case "$command" in
+    current)
+      shift || true
+      print_current "${1:-}"
+      ;;
+    apply)
+      shift || true
+      [[ $# -eq 1 ]] || { usage >&2; exit 1; }
+      apply_profile "$1"
+      ;;
+    cycle)
+      shift || true
+      [[ $# -eq 1 ]] || { usage >&2; exit 1; }
+      cycle_profile "$1"
+      ;;
+    menu)
+      show_menu
+      ;;
+    ""|-h|--help|help)
+      usage
+      ;;
+    *)
+      usage >&2
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"
