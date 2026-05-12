@@ -70,25 +70,18 @@
   },
   // Right modules
   "modules-right": [
-    "group/island-display",
-    "group/island-audio",
-    "group/island-network",
-    "group/island-bluetooth",
+    "group/island-display-audio",
+    "group/island-network-bluetooth",
     "group/island-clock",
     "group/island-status",
     "group/island-session"
   ],
-  "group/island-display": {
+  "group/island-display-audio": {
     "orientation": "horizontal",
     "modules": [
       "backlight",
       "custom/power-profile",
-      "battery"
-    ]
-  },
-  "group/island-audio": {
-    "orientation": "horizontal",
-    "modules": [
+      "battery",
       "wireplumber"
     ]
   },
@@ -113,15 +106,10 @@
       "custom/logout"
     ]
   },
-  "group/island-network": {
+  "group/island-network-bluetooth": {
     "orientation": "horizontal",
     "modules": [
-      "network"
-    ]
-  },
-  "group/island-bluetooth": {
-    "orientation": "horizontal",
-    "modules": [
+      "network",
       "bluetooth"
     ]
   },
