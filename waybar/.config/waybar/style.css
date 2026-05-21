@@ -82,13 +82,11 @@ tooltip label {
 
 #window,
 #island-launcher,
-#island-display,
-#island-audio,
+#island-display-audio,
 #island-clock,
 #island-status,
 #island-session,
-#island-network,
-#island-bluetooth {
+#island-network-bluetooth {
   background-color: @island;
   border: 1px solid @island-border;
   border-radius: 14px;
@@ -157,7 +155,9 @@ tooltip label {
 
 #backlight,
 #custom-power-profile,
+#battery,
 #clock.time,
+#network,
 #tray,
 #idle_inhibitor {
   border-right: 1px solid @island-divider;
