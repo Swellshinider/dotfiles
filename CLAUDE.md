@@ -55,3 +55,19 @@ source install/steam.sh      # Steam (multilib repo)
 ## Install Script Structure
 
 All scripts in `install/` are sourced by `install.sh`. They use pacman (official repos) and Paru (AUR). `install/assets/` contains the power-profile root helper, systemd service, and sudoers config.
+
+## Bash Commands Instructions
+
+When running commands, use the following format:
+
+```bash
+rtk <command>
+```
+
+Where `<command>` is the specific command you want to execute. For example, if you want to commit changes to git, you would run:
+
+```bash
+rtk git commit -m "Your commit message"
+```
+
+This is not a recomendation, it's mandatory to use the `rtk` prefix for all commands to ensure proper execution and tracking.
