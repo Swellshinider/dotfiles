@@ -2,7 +2,7 @@
 
 My personal dotfiles for Arch Linux, managed using [GNU Stow](https://www.gnu.org/software/stow/).
 
-![Preview](./docs/image.png)
+![Desktop Preview](./docs/desktop.png)
 
 ## Pre-configuration
 
