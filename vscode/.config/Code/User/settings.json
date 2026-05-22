@@ -167,5 +167,8 @@
   },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "claudeCode.preferredLocation": "panel",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.startupEditor": "none"
 }
