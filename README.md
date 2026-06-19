@@ -25,23 +25,6 @@ My personal dotfiles for Arch Linux, managed using [GNU Stow](https://www.gnu.or
    stow hypr
    ```
 
-## Hyprland autostart (optional)
-
-1. Configure a service so TTY will lauch hyprland
-
-   ```bash
-   sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
-   sudo nano /etc/systemd/system/getty@tty1.service.d/autologin.conf
-   ```
-
-2. Add this three lines into the file (replace **USERNAME** by your username):
-
-   ```text
-   [Service]
-   ExecStart=
-   ExecStart=-/usr/bin/agetty --autologin USERNAME --noclear %I $TERM
-   ```
-
 ## Installing packages (optional)
 
 Execute this to install all the recommended packages:
