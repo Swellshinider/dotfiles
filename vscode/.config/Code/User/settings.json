@@ -170,5 +170,11 @@
   },
   "claudeCode.preferredLocation": "panel",
   "workbench.editor.empty.hint": "hidden",
-  "workbench.startupEditor": "none"
+  "workbench.startupEditor": "none",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }
