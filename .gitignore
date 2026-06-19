@@ -12,3 +12,7 @@
 **/vscode/
 !**/vscode/keybindings.json
 !**/vscode/settings.json
+
+# AI stuff
+CLAUDE.md
+AGENTS.md
