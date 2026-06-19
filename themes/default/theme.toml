@@ -1,7 +1,7 @@
 schema = 1
 id = "default"
 name = "Default"
-description = "Current Hyprland desktop profile with Tokyo Night terminals and bundled default wallpaper."
+description = "Desktop profile with Tokyo Night terminals and bundled default wallpaper."
 
 [preview]
 image = "assets/wallpapers/default.jpg"
