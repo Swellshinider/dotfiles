@@ -1,0 +1,17 @@
+schema = 1
+id = "default"
+name = "Default"
+description = "Current Hyprland desktop profile with Tokyo Night terminals and bundled default wallpaper."
+
+[preview]
+image = "assets/wallpapers/default.jpg"
+
+[gtk]
+theme = "Breeze"
+color_scheme = "prefer-dark"
+
+[assets]
+wallpaper = "assets/wallpapers/default.jpg"
+lockscreen_wallpaper = "assets/wallpapers/default.jpg"
+wallpaper_dir = "~/Pictures/Wallpapers"
+

@@ -5,12 +5,4 @@ if pgrep -x wofi >/dev/null; then
   exit 0
 fi
 
-# Execute wofi in the top left corner
-exec wofi \
-  --show drun \
-  --prompt "" \
-  --location top_left \
-  --xoffset 10 \
-  --yoffset 5 \
-  --width 800 \
-  --height 420
+exec themectl launch launcher

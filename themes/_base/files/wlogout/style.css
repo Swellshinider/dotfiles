@@ -1,0 +1,79 @@
+* {
+  background-image: none;
+  font-size: 18px;
+}
+
+window {
+  background-color: transparent;
+}
+
+button {
+  color: #93cee9;
+  background-color: #101419;
+  outline-style: none;
+  border: none;
+  border-width: 0px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20%;
+  border-radius: 0px;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+button:focus {
+  background-color: #232c36;
+  background-size: 40%;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(.55, 0.0, .28, 1.682);
+}
+
+button:focus#lock {
+  border-radius: 12px;
+  margin-right: 15px;
+}
+
+button:focus#suspend {
+  border-radius: 12px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+button:focus#reboot {
+  border-radius: 12px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+button:focus#shutdown {
+  border-radius: 12px;
+  margin-left: 15px;
+}
+
+button#lock {
+  background-image: url("./images/lock.svg");
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+button#suspend {
+  background-image: url("./images/suspend.svg");
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+button#reboot {
+  background-image: url("./images/reboot.svg");
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+button#shutdown {
+  background-image: url("./images/shutdown.svg");
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
