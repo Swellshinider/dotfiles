@@ -10,8 +10,33 @@ thickness = 38
 radius = 0
 backgroundOpacity = 1
 font_family = "JetBrains Mono"
+margin_ends = 0
+margin_edge = 0
 
 # Widgets
-start = ["launcher", "wallpaper", "gap_12", "workspaces"]
+start = [
+    "launcher", 
+    "gap_12", 
+    "wallpaper", 
+    "gap_12", 
+    "workspaces"
+]
 center = ["media"]
-end = ["date_time", "gap_12", "clipboard", "network", "bluetooth", "volume", "brightness", "battery", "gap_12", "tray", "notifications", "session"]
+end = [
+    "date_time",
+    "gap_12",
+    "network",
+    "gap_12",
+    "bluetooth",
+    "gap_12",
+    "volume",
+    "gap_12",
+    "brightness",
+    "gap_12",
+    "battery",
+    "gap_12",
+    "tray",
+    "clipboard",
+    "notifications",
+    "session",
+]
