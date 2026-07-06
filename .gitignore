@@ -12,3 +12,7 @@
 **/vscode/
 !**/vscode/keybindings.json
 !**/vscode/settings.json
+
+# AGENTS
+AGENTS.md
+CLAUDE.md
