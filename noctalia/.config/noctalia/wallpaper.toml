@@ -1,0 +1,11 @@
+[wallpaper]
+enabled = true
+fill_mode = "crop"
+directory = "~/Pictures/Wallpapers"
+transition = "fade"
+
+[wallpaper.automation]
+enabled = false
+order = "random"
+recursive = true  
+interval_seconds = 1800

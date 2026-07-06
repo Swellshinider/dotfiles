@@ -1,0 +1,8 @@
+[widget.gap_12]
+type = "spacer"
+length = 12
+
+[widget.gap_24]
+type = "spacer"
+length = 24
+

@@ -1,0 +1,17 @@
+[bar]
+order = ["main"]
+
+[bar.main]
+scale = 1.125
+enabled = true
+position = "top"
+shadow = false
+thickness = 38
+radius = 0
+backgroundOpacity = 1
+font_family = "JetBrains Mono"
+
+# Widgets
+start = ["launcher", "wallpaper", "gap_12", "workspaces"]
+center = ["media"]
+end = ["date_time", "gap_12", "clipboard", "network", "bluetooth", "volume", "brightness", "battery", "gap_12", "tray", "notifications", "session"]

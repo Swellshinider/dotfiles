@@ -1,0 +1,10 @@
+[include]
+files = [
+    "widgets/"
+]
+
+[notification]
+enabled = true
+
+[theme]
+mode = "system"

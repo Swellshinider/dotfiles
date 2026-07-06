@@ -1,0 +1,23 @@
+[shell]
+ui_scale = 1.125
+corner_radius_scale = 5
+font_family = "JetBrains Mono"
+
+# Date/Time settings
+date_format = "%d-%M-%Y"
+time_format = "%H:%M:%S"
+
+# General settings
+offline_mode = true
+telemetry_enabled = false
+settings_show_advanced = true
+
+# Clipboard settings
+clipboard_enabled = true 
+clipboard_history_max_entries = 1000
+clipboard_confirm_clear_history = true
+clipboard_auto_paste = "auto"
+
+[shell.animation]
+enabled = true
+speed   = 1.5
