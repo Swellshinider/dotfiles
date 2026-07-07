@@ -2,7 +2,7 @@
 order = ["main"]
 
 [bar.main]
-scale = 1.125
+scale = 1.2
 enabled = true
 position = "top"
 shadow = false
@@ -21,7 +21,9 @@ start = [
     "gap_12", 
     "workspaces"
 ]
-center = ["media"]
+center = [
+    "media"
+]
 end = [
     "date_time",
     "gap_12",
@@ -34,9 +36,9 @@ end = [
     "brightness",
     "gap_12",
     "battery",
-    "gap_12",
-    "tray",
+    "gap_24",
     "clipboard",
+    "gap_12",
     "notifications",
     "session",
 ]
