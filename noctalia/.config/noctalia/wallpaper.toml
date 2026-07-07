@@ -5,7 +5,7 @@ directory = "~/Pictures/Wallpapers"
 transition = "fade"
 
 [wallpaper.automation]
-enabled = false
+enabled = true
 order = "random"
 recursive = true  
 interval_seconds = 1800

@@ -1,0 +1,2 @@
+[location]
+auto_locate = true            # resolve coordinates from your IP address when true

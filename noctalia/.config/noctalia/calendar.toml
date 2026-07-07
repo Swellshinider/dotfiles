@@ -1,0 +1,7 @@
+[calendar]
+enabled = true
+refresh_minutes = 15
+
+[calendar.account.work_google]
+type = "google"
+name = "Work"
