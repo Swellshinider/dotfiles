@@ -15,7 +15,8 @@ aur_programs=(
     "visual-studio-code-bin"
     "oh-my-posh"
     "sublime-text-4"
-    "wlogout"
+    "wlogout",
+    "hypremoji"
 )
 
 echo "================================"
